@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<schedule>
+    <rule>
+        <type>Cyclic</type>
+        <firstday>2022-06-06</firstday>
+        <lastday>2023-06-07</lastday>
+        <dailybegin>00:00</dailybegin>
+        <dailyend>23:59</dailyend>
+        <frequency>00:15</frequency>
+    </rule>
+</schedule>

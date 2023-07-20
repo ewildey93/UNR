@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<schedule>
+    <rule>
+        <type>Cyclic</type>
+        <firstday>2023-06-14</firstday>
+        <lastday>2024-05-01</lastday>
+        <dailybegin>00:00</dailybegin>
+        <dailyend>23:59</dailyend>
+        <frequency>04:00</frequency>
+    </rule>
+</schedule>

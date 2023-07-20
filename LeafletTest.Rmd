@@ -1,0 +1,57 @@
+---
+title: "LeafletTest"
+output: html_document
+date: "2023-07-19"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warnings=FALSE, message=FALSE)
+library(leaflet) # for interactive maps
+library(ggplot2) # tidyverse data visualization package
+library(mapview)
+library(tidyverse)
+library(leafpop)
+setwd("C:/Users/eliwi/OneDrive/Documents/UNR")
+
+Springs <- read.csv("C:/Users/eliwi/OneDrive/Documents/UNR/Spring Locs.csv")
+Springs$Code <- c("BBS", "DVS", "UC", "UIS")
+Smammals <-read.csv('./SmammalData.csv') 
+Smammals$Species <- gsub(pattern = "spp.",replacement = "sp.",x = Smammals$Species)
+Smammals$Species <- gsub(pattern = "Tamius",replacement = "Tamias",x = Smammals$Species)
+
+Smammals <- mutate(Smammals, labels= case_when(
+                                    Species == "Peromyscus maniculatus" ~ "P. maniculatis",
+                                    Species == "Tamias sp." ~ "Tamias sp.",
+                                    Species == "Microtus montanus" ~ "M. montanus",
+                                    Species == "Tamias minimus"  ~ "T. minimus",
+                                    Species == "Lemmiscus curtatus" ~ "L.curtatus",
+                                    Species == "Dipodomys californicus" ~ "D.californicus",
+                                    Species == "Woodrat sp." ~ "Woodrat sp.",
+                                    Species == "Pocket mouse?" ~ "Pocket mouse",
+                                    Species == "Kangaroo Rat" ~ "Kangaroo Rat",
+                                    Species == "Microtus sp." ~ "Microtus sp."
+))
+```
+
+```{r warnings=FALSE, message=FALSE}
+
+my_list <- list()  
+loop<-for (i in 1:length(Springs$Code)) {
+  Spring<-Smammals%>% filter(Spring==Springs$Code[i])
+  plot<-ggplot(Spring[Spring$Recap == "N",], aes(x = labels, fill=labels)) + 
+    geom_bar(stat="count", position = "dodge") +
+    ylab("Number of Individuals") + xlab("Species") +
+    theme(legend.position = "none") +
+    coord_flip()
+  my_list[[i]] <- plot
+}
+
+map <- leaflet(data=Springs) %>% 
+  addProviderTiles(providers$Esri.WorldTopoMap) %>% 
+  addMarkers(lng = ~Lon, lat = ~Lat, 
+             label = ~Name,
+             popup = popupGraph(my_list))
+
+map
+```
+

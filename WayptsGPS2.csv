@@ -1,0 +1,65 @@
+﻿
+metadata
+ID,name,desc,time,keywords,minlat,minlon,maxlat,maxlon,
+1,,,2023-06-29T19:27:53Z,,41.264292960986495,-119.89715301431715,41.328705959022045,-119.87327096052468,
+
+author
+ID,name,email,
+
+copyright
+year,license,author,
+
+link
+metadataID,authorID,wptID,rteptID,trkptID,rteID,trkID,text,type,href,
+1,,,,,,,"Garmin International",,http://www.garmin.com,
+
+rte
+ID,name,cmt,desc,src,number,type,IsAutoNamed,DisplayColor,TransportationMode,TripName,Date,DayNumber,
+
+rtept
+ID,rteID,lat,lon,ele,time,magvar,geoidheight,name,cmt,desc,src,sym,type,fix,sat,hdop,vdop,pdop,ageofdgpsdata,dgpsid,DepartureTime,StopDuration,ArrivalTime,CalculationMode,ElevationMode,NamedRoad_Name,NamedRoad_Id,NamedRoad_ProductId,TransportationMode,
+
+wpt
+ID,lat,lon,ele,time,magvar,geoidheight,name,cmt,desc,src,sym,type,fix,sat,hdop,vdop,pdop,ageofdgpsdata,dgpsid,Proximity,Temperature,Depth,DisplayMode,Samples,Expiration,CreationTime,
+1,41.278893984854221,-119.89715301431715,2153.702393,2021-09-07T21:40:21Z,,,"CONTROLSPRING",,,,"Flag, Blue","user",,,,,,,,,,,SymbolAndName,,,2021-09-07T21:40:21Z,
+2,41.328705959022045,-119.87327096052468,1992.5001219999999,2021-09-07T18:39:09Z,,,"DIVINESPRING",,,,"Flag, Blue","user",,,,,,,,,,,SymbolAndName,,,2021-09-07T18:39:09Z,
+3,41.277810037136078,-119.89322802051902,2200.1166990000002,2022-06-05T22:24:21Z,,,"MAHOG CAM1",,,,"Flag, Blue","user",,,,,,,,,,,SymbolAndName,,,2022-06-05T22:24:21Z,
+4,41.278171967715025,-119.89317798055708,2191.2502439999998,2022-06-05T22:04:29Z,,,"MAHOGANYTRI",,,,"Flag, Blue","user",,,,,,,,,,,SymbolAndName,,,2022-06-05T22:04:29Z,
+5,41.278369026258588,-119.89306298084557,2198.088135,2022-06-05T22:14:20Z,,,"MAHOGCAM2",,,,"Flag, Blue","user",,,,,,,,,,,SymbolAndName,,,2022-06-05T22:14:20Z,
+6,41.278924997895956,-119.8927660100162,2198.735596,2022-06-05T22:37:57Z,,,"MAHOGCAM3",,,,"Flag, Blue","user",,,,,,,,,,,SymbolAndName,,,2022-06-05T22:37:57Z,
+7,41.279406035318971,-119.89236895926297,2209.881836,2022-06-05T22:48:00Z,,,"MAHOGCAM4",,,,"Flag, Blue","user",,,,,,,,,,,SymbolAndName,,,2022-06-05T22:48:00Z,
+8,41.264628991484642,-119.88028896041214,1981.924438,2022-06-06T01:26:27Z,,,"UIS11",,,,"Flag, Blue","user",,,,,,,,,,,SymbolAndName,,,2022-06-06T01:26:27Z,
+9,41.267031999304891,-119.88584599457681,2003.0479740000001,2022-06-06T01:55:13Z,,,"UIS16",,,,"Flag, Blue","user",,,,,,,,,,,SymbolAndName,,,2022-06-06T01:55:13Z,
+10,41.265586959198117,-119.88237303681672,1987.453491,2022-06-06T01:36:54Z,,,"UISCAM10",,,,"Flag, Blue","user",,,,,,,,,,,SymbolAndName,,,2022-06-06T01:36:54Z,
+11,41.264413995668292,-119.88013599067926,1985.0516359999999,2022-06-06T01:25:23Z,,,"UISCAM12",,,,"Flag, Blue","user",,,,,,,,,,,SymbolAndName,,,2022-06-06T01:25:23Z,
+12,41.266304031014442,-119.88364901393652,1991.7178960000001,2022-06-06T01:41:26Z,,,"UISCAM14",,,,"Flag, Blue","user",,,,,,,,,,,SymbolAndName,,,2022-06-06T01:41:26Z,
+13,41.266999980434775,-119.88455702550709,1999.416138,2022-06-06T01:48:47Z,,,"UISCAM15",,,,"Flag, Blue","user",,,,,,,,,,,SymbolAndName,,,2022-06-06T01:48:47Z,
+14,41.266330014914274,-119.88276899792254,1991.1367190000001,2022-06-06T00:48:47Z,,,"UISCAM7",,,,"Flag, Blue","user",,,,,,,,,,,SymbolAndName,,,2022-06-06T00:48:47Z,
+15,41.265922989696264,-119.88243900239468,1989.7398679999999,2022-06-06T00:50:27Z,,,"UISCAM8",,,,"Flag, Blue","user",,,,,,,,,,,SymbolAndName,,,2022-06-06T00:50:27Z,
+16,41.266019968315959,-119.88350098952651,1994.2998050000001,2022-06-06T00:29:42Z,,,"UISTRI",,,,"Flag, Blue","user",,,,,,,,,,,SymbolAndName,,,2022-06-06T00:29:42Z,
+17,41.269939010962844,-119.88732003606856,2061.5529790000001,2022-06-05T23:36:24Z,,,"UIU CAM1",,,,"Flag, Blue","user",,,,,,,,,,,SymbolAndName,,,2022-06-05T23:36:24Z,
+18,41.269876984879375,-119.88750896416605,2056.7509770000001,2022-06-05T23:38:17Z,,,"UIUCAM2",,,,"Flag, Blue","user",,,,,,,,,,,SymbolAndName,,,2022-06-05T23:38:17Z,
+19,41.269720997661352,-119.88827297464013,2054.1965329999998,2022-06-05T23:54:05Z,,,"UIUCAM3",,,,"Flag, Blue","user",,,,,,,,,,,SymbolAndName,,,2022-06-05T23:54:05Z,
+20,41.269535003229976,-119.88886398263276,2062.8427729999999,2022-06-06T00:05:59Z,,,"UIUCAM4",,,,"Flag, Blue","user",,,,,,,,,,,SymbolAndName,,,2022-06-06T00:05:59Z,
+21,41.269417991861701,-119.8893519770354,2061.23999,2022-06-06T00:07:46Z,,,"UIUCAM5",,,,"Flag, Blue","user",,,,,,,,,,,SymbolAndName,,,2022-06-06T00:07:46Z,
+22,41.269844966009259,-119.88776796497405,2058.9428710000002,2022-06-05T23:42:42Z,,,"UIUCAMTRI",,,,"Flag, Blue","user",,,,,,,,,,,SymbolAndName,,,2022-06-05T23:42:42Z,
+23,41.264292960986495,-119.87978101707995,1983.3629149999999,2022-06-06T01:24:26Z,,,"UNR13",,,,"Flag, Blue","user",,,,,,,,,,,SymbolAndName,,,2022-06-06T01:24:26Z,
+24,41.266996040940285,-119.88388395868242,2053.40625,2021-09-07T22:51:30Z,,,"UPPERINDIAN",,,,"Flag, Blue","user",,,,,,,,,,,SymbolAndName,,,2021-09-07T22:51:30Z,
+
+Address
+wptID,StreetAddress1,StreetAddress2,City,State,Country,PostalCode,
+
+PhoneNumber
+wptID,Category,value,
+
+Categories
+wptID,Category,
+
+trk
+ID,name,cmt,desc,src,number,type,DisplayColor,
+
+trkseg
+ID,trkID,
+
+trkpt
+ID,trksegID,lat,lon,ele,time,magvar,geoidheight,name,cmt,desc,src,sym,type,fix,sat,hdop,vdop,pdop,ageofdgpsdata,dgpsid,Temperature,Depth,wtemp,hr,cad,
