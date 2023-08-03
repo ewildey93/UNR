@@ -1,0 +1,55 @@
+Date,Spring,Line,Trap Checks,# sm,# med,# lg,Total Traps,Set by,Flag Color,Time open/set,Time check/close,
+6/8/23,BBS,Upland,1,,,,30,EW,Blue/Orange and Pink,1825,1956,
+6/9/23,,,2,,,,30,,,,,
+6/9/23,,,3,,,,30,,,,,
+6/10/23,,,4,,,,30,,,,,
+6/10/23,,,5,,,,30,,,,,
+6/8/23,BBS,Water,1,,,,30,KVC,Orange Pink,1819,,
+6/9/23,,,2,,,,30,,,,,
+6/9/23,,,3,,,,30,,,,,
+6/10/23,,,4,,,,30,,,,,
+6/10/23,,,5,,,,30,,,,,
+6/7/23,DVS,Water,1,,,,20,"EW, KVC, DM",Pink and Blue,,,
+6/8/23,,,2,,,,20,,,,,
+6/8/23,,,3,,,,20,,,,,
+6/9/23,,,4,,,,20,,,,,
+6/9/23,,,5,,,,20,,,,,
+6/7/23,DVS,UIF,1,,,,20,EW,Blue/Orange and Pink,,,
+6/8/23,,,2,,,,20,,,,,
+6/8/23,,,3,,,,20,,,,,
+6/9/23,,,4,,,,20,,,,,
+6/9/23,,,5,,,,20,,,,,
+6/7/23,DVS,UOF,1,,,,20,"KVC, DM",Blue/Orange and Pink,,,
+6/8/23,,,2,,,,20,,,,,
+6/8/23,,,3,,,,20,,,,,
+6/9/23,,,4,,,,20,,,,,
+6/9/23,,,5,,,,20,,,,,
+7/5/23,UIS,Water,1,2,10,4,16,"EW, GP",Pink/Blue,,,
+7/6/23,UIS,Water,2,2,10,4,16,"EW,GP",Pink/Blue,,,closed traps during the day
+7/7/23,UIS,Water,3,2,10,4,16,"EW,GP",Pink/Blue,,,
+7/7/23,UIS,Water,4,2,10,4,16,,,,,
+7/5/23,UIS,UOF,1,2,13,1,16,EW,Pink/Blue,,,
+7/6/23,UIS,UOF,2,2,13,1,16,"EW,GP",Pink/Blue,,,clsoed traps during the day
+7/7/23,UIS,UOF,3,2,13,1,16,"EW,GP",Pink/Blue,,,
+7/7/23,UIS,UOF,4,2,13,1,16,"EW,GP",,,,
+7/5/23,UIS,UIF,1,5,9,2,16,GP,Pink/Blue,,,
+7/6/23,UIS,UIF,2,5,9,2,16,GP,Pink/Blue,,,clsoed traps during the day
+7/7/23,UIS,UIF,3,5,9,2,16,GP,Pink/Blue,,,
+7/7/23,UIS,UIF,4,5,9,2,16,GP,,,,
+7/8/23,DVS,Water,1,8,15,6,29,"EW,GP",Pink/Blue,,,
+7/9/23,DVS,Water,2,8,15,6,29,,,,,closed traps during the day
+7/10/23,DVS,Water,3,8,15,6,29,,,,,closed traps during the day
+7/8/23,DVS,UOF,1,8,15,6,29,EW,Pink/Blue,,,
+7/9/23,DVS,UOF,2,8,16,6,30,,,,,closed traps during the day
+7/10/23,DVS,UOF,3,8,16,6,30,,,,,closed traps during the day
+7/8/23,DVS,UIF,1,7,17,6,30,GP,Pink/Blue,,,
+7/9/23,DVS,UIF,2,7,17,6,30,,,,,closed traps during the day
+7/10/23,DVS,UIF,3,7,17,6,30,,,,,closed traps during the day
+7/8/23,BBS,Water,1,9,29,2,40,"EW,GP",Pink/Orange|Blue,,,
+7/9/23,BBS,Water,2,9,29,2,40,"EW,GP",,,,
+7/9/23,BBS,Water,3,9,29,2,40,,,,,
+7/10/23,BBS,Water,4,9,29,2,40,"EW,GP",,,,closed traps during the day
+7/8/23,BBS,Upland,1,12,20,8,40,"EW,GP",Pink/Orange|Blue,,,
+7/9/23,BBS,Upland,2,12,20,8,40,"EW,GP",Pink/Orange|Blue,,,
+7/9/23,BBS,Upland,3,12,20,8,40,,,,,
+7/10/23,BBS,Upland,4,12,20,8,40,"EW,GP",Pink/Orange|Blue,,,closed during the day

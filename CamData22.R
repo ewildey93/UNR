@@ -9,7 +9,7 @@ setwd("C:/Users/eliwi/OneDrive/Documents/UNR/")
 
 
 #bring in camera data transcribed from word doc
-Cam <- read.csv("C:/Users/eliwi/OneDrive/Documents/UNR/CamData22.csv", na.strings = c("", "N/A"))
+Cam <- read.csv("C:/Users/eliwi/OneDrive/Documents/UNR/CamData2022.csv", na.strings = c("", "N/A"))
 str(Cam)
 Cam$First.Photo.Date <- as.Date(Cam$First.Photo.Date, format = "%m/%d/%y")
 Cam$What.is.date.of.last.photo. <- as.Date(Cam$What.is.date.of.last.photo., format = "%m/%d/%y")
@@ -37,12 +37,14 @@ Cam4 <- Cam4%>% mutate(Taxa=case_when(species %in% mammals  ~ "Mammals",
                        species == "unID.Herp" ~ "Herps"
                        ))
 #clean up date column for key
-Cam4$Date <- as.Date(str_trim(Cam4$Detection.Dates), format= "%m/%d/%y")
+Cam4$Date <- as.Date(Cam4$Detection.Dates, format= "%m/%d/%y")
+table(is.na(Cam4$Date))
 
 #CI Station Info similar to data(camtraps), input for summaries in CamTrapR
 #get camera station info for trap effort
 StationInfo <- Cam[Cam$First.Photo.Date > "2022-01-01" & Cam$What.is.date.of.last.photo. > "2022-01-01",] %>% summarise(min=min(First.Photo.Date),max=max(What.is.date.of.last.photo.))
 StationInfo2 <- Cam[Cam$First.Photo.Date > "2022-01-01" & Cam$What.is.date.of.last.photo. > "2022-01-01",] %>% group_by(CamID) %>% summarise(min=min(First.Photo.Date),max=max(What.is.date.of.last.photo.))
+StationInfoSite <- Cam[Cam$First.Photo.Date > "2022-01-01" & Cam$What.is.date.of.last.photo. > "2022-01-01",] %>% group_by(Spring) %>% summarise(min=min(First.Photo.Date),max=max(What.is.date.of.last.photo.))
 StationInfo3 <- distinct(Cam4[,c(1,2,4,6)], CamID, .keep_all = T)
 StationInfo4 <- left_join(StationInfo2, StationInfo3, by='CamID')  
 
@@ -53,24 +55,90 @@ camOps <- cameraOperation(CTtable = StationInfo4,
 ) # can include argument hasProblems=T for periods where camera was out of order
 colnames(camOps)
 
+#camOps effort by Spring
+Springs <- unique(Cam4$Spring)
+CamOpList <- list()
+for(i in 1:length(Springs)){
+camOp <- cameraOperation(CTtable = StationInfo4[StationInfo4$Spring == Springs[i],],
+                          stationCol = 'CamID',
+                          setupCol = 'min',
+                          retrievalCol = 'max'
+)
+CamOpList[[Springs[i]]] <- camOp
+}
+
+
 
 #make detection history by Date  
 species <- unique(Cam4$species)
 dH <- data.frame(Date=seq.Date(from=StationInfo$min, to=StationInfo$max, by=1))
 #watch out for wrong dates (e.g. 01-01-2018)
+cameras <- unique(Cam4$CamID)
+
+#we can modify this to get specific springs to test species curves by number of days
 for (i in 1:length(species)){
-  x <- sapply(dH$Date, function (x) ifelse(x %in% Cam4[Cam4$species == species[i],]$Date, 1,0))
-  y <- sapply(dH$Date, function (x) ifelse(x %in% Cam4[Cam4$species == species[i],]$Date, paste(Cam4$Spring, Cam4$Line),NA))
+  CamSub <- Cam4[Cam4$species == species[i],]
+  x <- sapply(dH$Date, function (x) ifelse(x %in% CamSub$Date, length(CamSub$Date[CamSub$Date == x]),0))
+  y <- sapply(dH$Date, function (Date) ifelse(Date %in% CamSub$Date, paste(paste(CamSub[CamSub$Date == Date,]$Spring, CamSub[CamSub$Date == Date,]$Line), collapse=", "),NA))
   dH[ ,ncol(dH)+1] <- x                # Append new column
   colnames(dH)[ncol(dH)] <- species[i] # Rename column name
   dH[ ,ncol(dH)+1] <- y
   colnames(dH)[ncol(dH)] <- colnames(dH)[ncol(dH)] <- paste(species[i], "SpringLine")
 }
+
 # setup and retrieval days default to 0.5 day effort from cameraOperation function
 dH$TrapEffort <- sapply(dH$Date, function (x) sum(camOps[,as.character(x)], na.rm = T))
-
 write.csv(dH, "./CamData22DetectionHistory.csv")
 dH <- read.csv("./CamData22DetectionHistory.csv")
+
+
+#Detection Histories by Site
+Sites <- unique(Cam4$Spring)
+species <- unique(Cam4$species)
+dHList <- list()
+for (s in 1:length(Sites)){
+  Cam5 <- Cam4[Cam4$Spring == Sites[s],]
+  dH <- data.frame(Date=seq.Date(from=StationInfo$min, to=StationInfo$max, by=1))
+
+  for (i in 1:length (species)){
+    CamSub <- Cam5[Cam5$species == species[i],]
+    x <- sapply(dH$Date, function (x) ifelse(x %in% CamSub$Date, length(CamSub$Date[CamSub$Date == x]),0))
+    y <- sapply(dH$Date, function (Date) ifelse(Date %in% CamSub$Date, paste(paste(CamSub[CamSub$Date == Date,]$Spring, CamSub[CamSub$Date == Date,]$Line), collapse=", "),NA))
+    dH[ ,ncol(dH)+1] <- x                # Append new column
+    colnames(dH)[ncol(dH)] <- species[i] # Rename column name
+    dH[ ,ncol(dH)+1] <- y
+    colnames(dH)[ncol(dH)] <- colnames(dH)[ncol(dH)] <- paste(species[i], "SpringLine")
+    }
+  dHList[[Sites[s]]] <- dH
+  
+  }
+
+lapply(dHList, function (x) table(x$Cows))
+
+
+
+
+
+
+
+
+DVS <- Cam4[Cam4$Spring == "DVS",]
+DVSte <- as.data.frame(colSums(CamOpList[["DVS"]], na.rm = T))
+colnames(DVSte)[1] <- "DailyEffort"
+DVSte$Date <- as.Date(rownames(DVSte), format = "%Y-%m-%d")
+DVSte$CumSum <- cumsum(DVSte$DailyEffort)
+DVS <- left_join(DVS, DVSte, by="Date")
+table(is.na(DVS$CumSum))
+
+DVS <- DVS[order(DVS$Date),]
+DVS <- DVS%>%ungroup()%>%mutate(Unq = cumsum(!duplicated(species)))
+DVSUnq <- DVS%>%group_by(Date)%>%slice_max(Unq)%>%ungroup()
+DVSUnq2 <- DVSUnq%>%distinct(Unq, .keep_all = T)
+
+
+ggplot(DVSUnq, aes(x=CumSum, y=Unq)) + geom_smooth()#geom_line() + geom_point()
+
+
 
 #Species Richness by Spring, not sure how to handle unknowns
 Richness <- Cam4%>%group_by(Spring)%>%summarise(Richness=length(unique(species)), 
