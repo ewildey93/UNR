@@ -1,5 +1,5 @@
-?split
-library(officer)
+
+
 library(camtrapR)
 library(dplyr)
 library(tidyr)
@@ -15,6 +15,7 @@ Cam <- read.csv("C:/Users/eliwi/OneDrive/Documents/UNR/CamData2022.csv", na.stri
 str(Cam)
 Cam$First.Photo.Date <- as.Date(Cam$First.Photo.Date, format = "%m/%d/%y")
 Cam$What.is.date.of.last.photo. <- as.Date(Cam$What.is.date.of.last.photo., format = "%m/%d/%y")
+
 #make rows for detection dates of each species
 Cam2 <- Cam%>%pivot_longer(cols = 14:38,
                    names_to = "species",
@@ -100,7 +101,9 @@ species <- unique(Cam4$species)
 dHList <- list()
 for (s in 1:length(Sites)){
   Cam5 <- Cam4[Cam4$Spring == Sites[s],]
-  dH <- data.frame(Date=seq.Date(from=StationInfo$min, to=StationInfo$max, by=1))
+  x <- StationInfoSite[StationInfoSite$Spring == Sites[s],]
+  dH <- data.frame(Date=seq.Date(from=x$min, 
+                                 to=x$max, by=1))
 
   for (i in 1:length (species)){
     CamSub <- Cam5[Cam5$species == species[i],]
@@ -118,12 +121,14 @@ for (s in 1:length(Sites)){
 lapply(dHList, function (x) table(x$Cows))
 
 dHbySite <- rbindlist(dHList, idcol="Site")
+
+
+#get extrapolated species richness by site
 poolsites<- as.data.frame(Sites)
 poolsites$Obsfull <- 'x'
 poolsites$bootfull <- 'x'
 poolsites$bootfullse <- 'x'
 
-#get extrapolated species richness by site
 for(s in 1:length(Sites)){
   sub <- subset(dHbySite, Site== Sites[s])
   grep(pattern= "SpringLine", colnames(sub))
@@ -143,7 +148,7 @@ compar_fh<- poolsites #fh will be full hours
 fh1 <- matrix(0,nrow=length(Sites),ncol=100)
 rownames(fh1) <- Sites
 
-this.days <- 7 
+this.days <- 30 
 file =1
 for(file in 1:length(Sites)){
   
@@ -188,15 +193,130 @@ compar_fh$fh1<- rowMeans(fh1)
 compar_fh$fh1.se <- apply(fh1, 1, function(x) sd(x) / sqrt(length(x)))
 
 
+#60 days
+fh2 <- matrix(0,nrow=length(Sites),ncol=100)
+rownames(fh2) <- Sites
+
+this.days <- 60 
+file =1
+for(file in 1:length(Sites)){
+  
+  thisfile <- Sites[file]
+  sub <- subset(dHbySite,Site==thisfile) ##choose file we are on now
+  
+  nBoot <- 100
+  b=1
+  for (b in 1:nBoot){
+    
+    
+    if(nrow(sub)>0){
+      
+      alldays <- sort(unique(sub$JDAY))
+      
+      if(length(alldays)>1){
+        days <- sample(alldays,min(length(alldays),this.days),replace = T)
+      }else{
+        days <- rep(alldays,times=this.days)
+      }
+      
+      sub2 <- subset(sub,JDAY%in%days)
+      
+      
+      sub4<- subset(sub2, select = species)
+      
+      
+      p1<-specpool(sub4, smallsample = TRUE)
+      fh2[rownames(fh2) == thisfile,b]<- p1$boot
+      
+      
+    }else{
+      fh2[rownames(fh2) == thisfile,b]<- NA
+    }
+    
+    
+    
+  }
+  
+}
+compar_fh$fh2<- rowMeans(fh2)
+compar_fh$fh2.se <- apply(fh2, 1, function(x) sd(x) / sqrt(length(x)))
 
 
-DVS <- Cam4[Cam4$Spring == "DVS",]
-DVSte <- as.data.frame(colSums(CamOpList[["DVS"]], na.rm = T))
+#90 days
+fh3 <- matrix(0,nrow=length(Sites),ncol=100)
+rownames(fh3) <- Sites
+
+this.days <- 90 
+file =1
+for(file in 1:length(Sites)){
+  
+  thisfile <- Sites[file]
+  sub <- subset(dHbySite,Site==thisfile) ##choose file we are on now
+  
+  nBoot <- 100
+  b=1
+  for (b in 1:nBoot){
+    
+    
+    if(nrow(sub)>0){
+      
+      alldays <- sort(unique(sub$JDAY))
+      
+      if(length(alldays)>1){
+        days <- sample(alldays,min(length(alldays),this.days),replace = T)
+      }else{
+        days <- rep(alldays,times=this.days)
+      }
+      
+      sub2 <- subset(sub,JDAY%in%days)
+      
+      
+      sub4<- subset(sub2, select = species)
+      
+      
+      p1<-specpool(sub4, smallsample = TRUE)
+      fh3[rownames(fh3) == thisfile,b]<- p1$boot
+      
+      
+    }else{
+      fh3[rownames(fh3) == thisfile,b]<- NA
+    }
+    
+    
+    
+  }
+  
+}
+compar_fh$fh3<- rowMeans(fh3)
+compar_fh$fh3.se <- apply(fh3, 1, function(x) sd(x) / sqrt(length(x)))
+
+
+
+TE <- data.frame(DailyEffort=numeric(), Date=character(), CumSum=numeric(), Spring=character())
+for (s in 1:length(Springs)) {
+#DVS <- dHbySite[dHbySite$Site == Springs[i],]
+  if(nrow(CamOpList[[Springs[s]]]) == 1){
+    DVSte <- as.data.frame(t(CamOpList[[Springs[s]]]))
+    colnames(DVSte)[1] <- "DailyEffort"
+    DVSte$Date <- as.Date(rownames(DVSte), format = "%Y-%m-%d")
+    DVSte$CumSum <- cumsum(DVSte$DailyEffort)
+    DVSte$Spring <- Springs[s]
+  }else{
+DVSte <- as.data.frame(colSums(CamOpList[[Springs[s]]], na.rm = T))
 colnames(DVSte)[1] <- "DailyEffort"
 DVSte$Date <- as.Date(rownames(DVSte), format = "%Y-%m-%d")
 DVSte$CumSum <- cumsum(DVSte$DailyEffort)
-DVS <- left_join(DVS, DVSte, by="Date")
-table(is.na(DVS$CumSum))
+DVSte$Spring <- Springs[s]
+}
+TE <- rbind(TE, DVSte)
+}
+
+
+#camOp list based off of deployment dates of cameras which feeds into TE, whereas
+#dHbySite based off of station info site, dates of cameras at site level
+table(TE$Spring)
+table(dHbySite$Site)
+
 
 DVS <- DVS[order(DVS$Date),]
 DVS <- DVS%>%ungroup()%>%mutate(Unq = cumsum(!duplicated(species)))
