@@ -316,6 +316,12 @@ TE <- rbind(TE, DVSte)
 #dHbySite based off of station info site, dates of cameras at site level
 table(TE$Spring)
 table(dHbySite$Site)
+colnames(dHbySite)[1] <- "Spring"
+
+dHbySite%>%group_by(Spring)%>%summarise(range=range(Date))
+TE%>%group_by(Spring)%>%summarise(range=range(Date))
+TE2 <- cbind(dHbySite, TE)
+saveRDS(TE2, "./TE2")
 
 
 DVS <- DVS[order(DVS$Date),]
