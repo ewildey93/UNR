@@ -5,6 +5,8 @@ library(dplyr)
 library(tidyr)
 library(stringr)
 library(ggplot2)
+library(data.table)
+library(vegan)
 setwd("C:/Users/eliwi/OneDrive/Documents/UNR/")
 
 
@@ -78,7 +80,7 @@ cameras <- unique(Cam4$CamID)
 #we can modify this to get specific springs to test species curves by number of days
 for (i in 1:length(species)){
   CamSub <- Cam4[Cam4$species == species[i],]
-  x <- sapply(dH$Date, function (x) ifelse(x %in% CamSub$Date, length(CamSub$Date[CamSub$Date == x]),0))
+  x <- sapply(dH$Date, function (x) ifelse(x %in% CamSub$Date, 1,0)) #replace 1 with length(CamSub$Date[CamSub$Date == x]) to get incidence at individual cameras
   y <- sapply(dH$Date, function (Date) ifelse(Date %in% CamSub$Date, paste(paste(CamSub[CamSub$Date == Date,]$Spring, CamSub[CamSub$Date == Date,]$Line), collapse=", "),NA))
   dH[ ,ncol(dH)+1] <- x                # Append new column
   colnames(dH)[ncol(dH)] <- species[i] # Rename column name
@@ -102,7 +104,7 @@ for (s in 1:length(Sites)){
 
   for (i in 1:length (species)){
     CamSub <- Cam5[Cam5$species == species[i],]
-    x <- sapply(dH$Date, function (x) ifelse(x %in% CamSub$Date, length(CamSub$Date[CamSub$Date == x]),0))
+    x <- sapply(dH$Date, function (x) ifelse(x %in% CamSub$Date, 1,0)) #replace 1 with length(CamSub$Date[CamSub$Date == x]) to get incidence at individual cameras
     y <- sapply(dH$Date, function (Date) ifelse(Date %in% CamSub$Date, paste(paste(CamSub[CamSub$Date == Date,]$Spring, CamSub[CamSub$Date == Date,]$Line), collapse=", "),NA))
     dH[ ,ncol(dH)+1] <- x                # Append new column
     colnames(dH)[ncol(dH)] <- species[i] # Rename column name
@@ -115,9 +117,75 @@ for (s in 1:length(Sites)){
 
 lapply(dHList, function (x) table(x$Cows))
 
+dHbySite <- rbindlist(dHList, idcol="Site")
+poolsites<- as.data.frame(Sites)
+poolsites$Obsfull <- 'x'
+poolsites$bootfull <- 'x'
+poolsites$bootfullse <- 'x'
 
+#get extrapolated species richness by site
+for(s in 1:length(Sites)){
+  sub <- subset(dHbySite, Site== Sites[s])
+  grep(pattern= "SpringLine", colnames(sub))
+  sub1<- subset(sub, select = species)
+  #estimates extrapolated species richness
+  p1<-specpool(sub1, smallsample = TRUE)
+  poolsites$Obsfull[poolsites$Sites == Sites[s]]<- p1$Species
+  poolsites$bootfull[poolsites$Sites == Sites[s]]<- p1$boot
+  poolsites$bootfullse[poolsites$Sites == Sites[s]]<- p1$boot.se
+}
 
+#get extrapolated species richness by site dependent on sampling length
+#30 days
+dHbySite$JDAY <- lubridate::yday(dHbySite$Date)
+compar_fh<- poolsites #fh will be full hours
 
+fh1 <- matrix(0,nrow=length(Sites),ncol=100)
+rownames(fh1) <- Sites
+
+this.days <- 7 
+file =1
+for(file in 1:length(Sites)){
+  
+  thisfile <- Sites[file]
+  sub <- subset(dHbySite,Site==thisfile) ##choose file we are on now
+  
+  nBoot <- 100
+  b=1
+  for (b in 1:nBoot){
+    
+    
+    if(nrow(sub)>0){
+      
+      alldays <- sort(unique(sub$JDAY))
+      
+      if(length(alldays)>1){
+        days <- sample(alldays,min(length(alldays),this.days),replace = T)
+      }else{
+        days <- rep(alldays,times=this.days)
+      }
+      
+      sub2 <- subset(sub,JDAY%in%days)
+      
+      
+      sub4<- subset(sub2, select = species)
+      
+      
+      p1<-specpool(sub4, smallsample = TRUE)
+      fh1[rownames(fh1) == thisfile,b]<- p1$boot
+      
+      
+    }else{
+      fh1[rownames(fh1) == thisfile,b]<- NA
+    }
+    
+    
+    
+  }
+  
+}
+compar_fh$fh1<- rowMeans(fh1)
+compar_fh$fh1.se <- apply(fh1, 1, function(x) sd(x) / sqrt(length(x)))
 
 
 
