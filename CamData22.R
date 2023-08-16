@@ -43,6 +43,7 @@ Cam4 <- Cam4%>% mutate(Taxa=case_when(species %in% mammals  ~ "Mammals",
 Cam4$Date <- as.Date(Cam4$Detection.Dates, format= "%m/%d/%y")
 table(is.na(Cam4$Date))
 
+
 #CI Station Info similar to data(camtraps), input for summaries in CamTrapR
 #get camera station info for trap effort
 StationInfo <- Cam[Cam$First.Photo.Date > "2022-01-01" & Cam$What.is.date.of.last.photo. > "2022-01-01",] %>% summarise(min=min(First.Photo.Date),max=max(What.is.date.of.last.photo.))
@@ -121,7 +122,7 @@ for (s in 1:length(Sites)){
 lapply(dHList, function (x) table(x$Cows))
 
 dHbySite <- rbindlist(dHList, idcol="Site")
-
+saveRDS(dHbySite, "./dHbySite.rds")
 
 #get extrapolated species richness by site
 poolsites<- as.data.frame(Sites)
@@ -148,12 +149,14 @@ compar_fh<- poolsites #fh will be full hours
 fh1 <- matrix(0,nrow=length(Sites),ncol=100)
 rownames(fh1) <- Sites
 
+BootEffort1 <- matrix(0,nrow=length(Sites),ncol=100)
+rownames(BootEffort1) <- Sites
 this.days <- 30 
 file =1
 for(file in 1:length(Sites)){
   
   thisfile <- Sites[file]
-  sub <- subset(dHbySite,Site==thisfile) ##choose file we are on now
+  sub <- subset(TE2,Spring==thisfile) ##choose file we are on now
   
   nBoot <- 100
   b=1
@@ -172,13 +175,13 @@ for(file in 1:length(Sites)){
       
       sub2 <- subset(sub,JDAY%in%days)
       
-      
+      Effort <- sub2$DailyEffort
       sub4<- subset(sub2, select = species)
       
       
       p1<-specpool(sub4, smallsample = TRUE)
       fh1[rownames(fh1) == thisfile,b]<- p1$boot
-      
+      BootEffort1[rownames(BootEffort1) == thisfile, b] <- sum(Effort)
       
     }else{
       fh1[rownames(fh1) == thisfile,b]<- NA
@@ -191,18 +194,20 @@ for(file in 1:length(Sites)){
 }
 compar_fh$fh1<- rowMeans(fh1)
 compar_fh$fh1.se <- apply(fh1, 1, function(x) sd(x) / sqrt(length(x)))
-
+compar_fh$fh1.effort <- rowMeans(BootEffort1)
 
 #60 days
 fh2 <- matrix(0,nrow=length(Sites),ncol=100)
 rownames(fh2) <- Sites
 
+BootEffort2 <- matrix(0,nrow=length(Sites),ncol=100)
+rownames(BootEffort2) <- Sites
 this.days <- 60 
 file =1
 for(file in 1:length(Sites)){
   
   thisfile <- Sites[file]
-  sub <- subset(dHbySite,Site==thisfile) ##choose file we are on now
+  sub <- subset(TE2,Spring==thisfile) ##choose file we are on now
   
   nBoot <- 100
   b=1
@@ -220,14 +225,14 @@ for(file in 1:length(Sites)){
       }
       
       sub2 <- subset(sub,JDAY%in%days)
-      
+      Effort <- sub2$DailyEffort
       
       sub4<- subset(sub2, select = species)
       
       
       p1<-specpool(sub4, smallsample = TRUE)
       fh2[rownames(fh2) == thisfile,b]<- p1$boot
-      
+      BootEffort2[rownames(BootEffort2) == thisfile, b] <- sum(Effort)
       
     }else{
       fh2[rownames(fh2) == thisfile,b]<- NA
@@ -240,18 +245,20 @@ for(file in 1:length(Sites)){
 }
 compar_fh$fh2<- rowMeans(fh2)
 compar_fh$fh2.se <- apply(fh2, 1, function(x) sd(x) / sqrt(length(x)))
-
+compar_fh$fh2.effort <- rowMeans(BootEffort2)
 
 #90 days
 fh3 <- matrix(0,nrow=length(Sites),ncol=100)
 rownames(fh3) <- Sites
 
+BootEffort3 <- matrix(0,nrow=length(Sites),ncol=100)
+rownames(BootEffort3) <- Sites
 this.days <- 90 
 file =1
 for(file in 1:length(Sites)){
   
   thisfile <- Sites[file]
-  sub <- subset(dHbySite,Site==thisfile) ##choose file we are on now
+  sub <- subset(TE2,Spring==thisfile) ##choose file we are on now
   
   nBoot <- 100
   b=1
@@ -273,10 +280,10 @@ for(file in 1:length(Sites)){
       
       sub4<- subset(sub2, select = species)
       
-      
+      Effort <- sub2$DailyEffort
       p1<-specpool(sub4, smallsample = TRUE)
       fh3[rownames(fh3) == thisfile,b]<- p1$boot
-      
+      BootEffort3[rownames(BootEffort3) == thisfile, b] <- sum(Effort)
       
     }else{
       fh3[rownames(fh3) == thisfile,b]<- NA
@@ -289,6 +296,19 @@ for(file in 1:length(Sites)){
 }
 compar_fh$fh3<- rowMeans(fh3)
 compar_fh$fh3.se <- apply(fh3, 1, function(x) sd(x) / sqrt(length(x)))
+compar_fh$fh3.effort <- rowMeans(BootEffort3)
+
+
+#Graph
+Rich <- c(compar_fh$fh1, compar_fh$fh2, compar_fh$fh3)
+SE <- c(compar_fh$fh1.se, compar_fh$fh2.se, compar_fh$fh3.se)
+eff <- c(compar_fh$fh1.effort, compar_fh$fh2.effort, compar_fh$fh3.effort)
+fhMelt <- data.frame(Sites=rep(Sites, 3),Richness=Rich, RichSE=SE, Effort=eff)
+fhMelt$lwr <- fhMelt$Richness - 1.96*fhMelt$RichSE
+fhMelt$upr <- fhMelt$Richness + 1.96*fhMelt$RichSE
+ggplot(fhMelt, aes(x=Effort, y=Rich, color=Sites)) + geom_ribbon(aes(ymin=lwr, ymax=upr), fill= "lightblue") 
+
+
 
 
 
@@ -321,8 +341,8 @@ colnames(dHbySite)[1] <- "Spring"
 dHbySite%>%group_by(Spring)%>%summarise(range=range(Date))
 TE%>%group_by(Spring)%>%summarise(range=range(Date))
 TE2 <- cbind(dHbySite, TE)
-saveRDS(TE2, "./TE2")
-
+saveRDS(TE2, "./TE2.rds")
+TE2 <- readRDS("./TE2.RDS")
 
 DVS <- DVS[order(DVS$Date),]
 DVS <- DVS%>%ungroup()%>%mutate(Unq = cumsum(!duplicated(species)))
@@ -332,7 +352,58 @@ DVSUnq2 <- DVSUnq%>%distinct(Unq, .keep_all = T)
 
 ggplot(DVSUnq, aes(x=CumSum, y=Unq)) + geom_smooth()#geom_line() + geom_point()
 
+#boot species richness by trap nights
+TEB <- matrix(0,nrow=length(Sites),ncol=100)
+rownames(TEB) <- Sites
 
+
+this.days <- 30 
+file =1
+for(file in 1:length(Sites)){
+  
+  thisfile <- Sites[file]
+  sub <- subset(TE2,Spring==thisfile) ##choose file we are on now
+  
+  nBoot <- 100
+  b=1
+  is_smaller <- FALSE
+  while(!is_smaller){
+  for (b in 1:nBoot){
+    
+    
+    if(nrow(sub)>0){
+      
+      alldayeffort <- sort(sub$DailyEffort)
+      
+      if(length(alldays)>1){
+        days <- sample(alldays,min(length(alldays),this.days),replace = T)
+        if(cumsum(dailyeffort) > this.days) is_smaller <- TRUE
+      }else{
+        days <- rep(alldays,times=this.days)
+      }
+      
+      sub2 <- subset(sub,JDAY%in%days)
+      
+      Effort <- sub2$DailyEffort
+      sub4<- subset(sub2, select = species)
+      
+      
+      p1<-specpool(sub4, smallsample = TRUE)
+      fh1[rownames(fh1) == thisfile,b]<- p1$boot
+      BootEffort[rownames(BootEffort) == thisfile, b] <- sum(Effort)
+      
+    }else{
+      fh1[rownames(fh1) == thisfile,b]<- NA
+    }
+  }
+    
+    
+  }
+  
+}
+compar_fh$fh1<- rowMeans(fh1)
+compar_fh$fh1.se <- apply(fh1, 1, function(x) sd(x) / sqrt(length(x)))
+compar_fh$fh1.effort <- rowMeans(BootEffort)
 
 #Species Richness by Spring, not sure how to handle unknowns
 Richness <- Cam4%>%group_by(Spring)%>%summarise(Richness=length(unique(species)), 
@@ -340,6 +411,27 @@ Richness <- Cam4%>%group_by(Spring)%>%summarise(Richness=length(unique(species))
                                                 Mammals= length(unique(species[Taxa == "Mammals"])),
                                                 Birds= length(unique(species[Taxa == "Birds"])),
                                                 Herps= length(unique(species[Taxa == "Herps"])))
+CamEff <- TE%>%group_by(Spring)%>%summarise(TrapNights=max(CumSum))
+Richness2 <- merge(Richness, CamEff, by="Spring")
+Richness2$Species <- gsub(pattern=".", replacement = " ", Richness2$Species, fixed=T)
+RichnessPub <- Richness2%>%gt()%>%
+  tab_header(
+    title= "Species Richness by Spring"
+  )%>%
+  opt_row_striping(row_striping=TRUE)%>%
+  cols_label(
+    Richness= "Species Richness",
+    Species= "Species Observed",
+    TrapNights= "Effort (No. of Trap Nights)"
+    )%>%
+  tab_style(
+    style = cell_text(align = "center"),
+    locations = cells_column_labels(columns = 2))%>%
+  tab_options(data_row.padding = px(15)) %>%
+  fmt_markdown(columns = 2) %>%
+  cols_align(align = "center", columns = 2)
+RichnessPub
+gtsave(RichnessPub, "RichnessCamTable.png")
 
 
 #Species Richness by Habitat Type (make Line data reflect Habitat Spring vs. Upland)
@@ -374,8 +466,14 @@ write.csv(GPS, "./GPSWayPts.csv")
    coord_fixed(ratio = 1) +
    scale_size_discrete(name = "n species")
 
-
-
+# return times
+Ung <- Cam4[Cam4$species %in% c("Mule.Deer", "Pronghorn"),] 
+Cows <- Cam4[Cam4$species == "Cows",]
+write.csv(Ung, "./Ungulates.csv")
+write.csv(Cows, "./Cows.csv")
+DeerTime <- read.csv("./Ungulates.csv")
+DeerTime$DateTime <- as.POSIXct(paste(DeerTime$Date, DeerTime$Time), format="%m/%d/%Y %H:%M:%S")
+DeerTime2 <- DeerTime%>%group_by(Spring)%>%arrange(DateTime, .by_group = TRUE)%>%mutate(returntime = difftime(DateTime, lag(DateTime, default = first(DateTime)), units = "days"))
 
 #############################work in progress below this##################################
 #come up with record table like data(recordTableSample) for input for summaries in CamTrapR  

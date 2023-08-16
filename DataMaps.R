@@ -49,6 +49,8 @@ loop<-for (i in 1:length(Springs$Code)) {
   my_list[[i]] <- plot
 }
 
+my_list[[1]]
+
 
 map <- leaflet(data=Springs) %>% 
   addProviderTiles(providers$Esri.WorldTopoMap) %>% 
@@ -107,12 +109,14 @@ Effort<- fill(Effort, Spring, Line, .direction = "down")
 colnames(Effort)[4] <- "Check."
 Effort$Month <- month(Effort$Date)
 Effort$Check. <- as.character(Effort$Check.)
+Effort$Occ <- paste(Effort$Spring, Effort$Line, Effort$Month, "2023")
 str(Effort)
 str(Smammals3)
 table(Smammals3$Line)
 table(Effort$Line)
 table(is.na(Smammals$Date))
-
+Eff <- Effort%>%group_by(Spring, Month, Line)%>%summarise(TrapNights= max(TrapNights))
+Eff2 <- Eff%>%group_by(Spring)%>%summarise(TrapNights=sum(TrapNights))
 
 Smammals4 <- Smammals3[Smammals3$Date > "2023-01-01",]
 Smammals5 <- left_join(Smammals4, Effort, by=c("Spring", "Line","Month", "Check."), relationship= "many-to-one")
@@ -187,6 +191,54 @@ BBS <- Smammals5[Smammals5$Spring == "BBS",]
 BBS <- BBS%>%pivot_wider(names_from = Species,values_from = Species, values_fn = length)
 data(BCI)
 specaccum(xvar=TrapNights, w=TrapNights)
+
+
+
+
+#summary table
+SmRichness <- Smammals%>%group_by(Spring)%>%summarise(Richness=length(unique(Species)), 
+                                                Species=paste(unique(Species), collapse=", "))
+CamEff <- TE%>%group_by(Spring)%>%summarise(TrapNights=max(CumSum))
+Richness2 <- merge(SmRichness, Eff2, by="Spring")
+
+SmRichnessPub <- Richness2%>%gt()%>%
+  tab_header(
+    title= "Smammal Species Richness by Spring"
+  )%>%
+  opt_row_striping(row_striping=TRUE)%>%
+  cols_label(
+    Richness= "Species Richness",
+    Species= "Species Observed",
+    TrapNights= "Effort (No. of Trap Nights)"
+  )%>%
+  tab_style(
+    style = cell_text(align = "center"),
+    locations = cells_column_labels(columns = 2))%>%
+  tab_options(data_row.padding = px(15)) %>%
+  fmt_markdown(columns = 2) %>%
+  cols_align(align = "center", columns = 2)
+SmRichnessPub
+gtsave(SmRichnessPub, "RichnessSmTable.png")
+
+
+#histogram by check
+TrapsbyCheck <- Effort%>%group_by(Check.)%>%summarise(sum=sum(Total.Traps))
+HistbyCheck <- Smammals5%>%group_by(Check.)%>%summarise(count=n())
+HistbyCheck$perTN <- HistbyCheck$count/TrapsbyCheck$sum
+ggplot(HistbyCheck, aes(x=Check., y=perTN)) + geom_col()
+
+
+HistbyOcc <- Smammals5%>%group_by(site, Check.)%>%summarise(count=n())
+HistbyOcc <- HistbyOcc[
+  with(HistbyOcc, order(site,Check.)),
+]
+colnames(HistbyOcc)[1] <- "Occ"
+HistbyOcc <- left_join(Effort, HistbyOcc, by=c("Occ", "Check."))
+HistbyOcc$count[is.na(HistbyOcc$count)] <- 0
+HistbyOcc$perTN <- HistbyOcc$count/HistbyOcc$Total.Traps
+HistOcc2 <- HistbyOcc%>%group_by(Check.)%>%summarise(mean=mean(perTN), sd=sd(perTN), se=sd(perTN)/sqrt(n()), n=n())
+ggplot(HistOcc2, aes(x=Check., y=mean, ymin=mean-1.96*se, ymax=mean+1.96*se)) + geom_point() +
+      geom_errorbar() + ylim(0, 0.25) + xlab("Trap Check Number") + ylab("Mean Catch per Unit Effort")
 
 ###############scrap##################
 beetles <- read.delim ('https://raw.githubusercontent.com/zdealveindy/anadat-r/master/data/carabid-beetles-boreal-forest.txt', row.names = 1)

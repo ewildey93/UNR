@@ -1,8 +1,8 @@
 ####Sonobat Data###########
 library(dplyr)
+library(tidyr)
 
-
-BatDat <- read.delim("C:/Users/eliwi/OneDrive/Documents/UNR/DVSTRI4_B2SonoBat.txt")
+BatDat <- read.delim("C:/Users/eliwi/OneDrive/Documents/UNR/DVSTRI4_B2SonoBat.txt", na.strings=c("NA", ""))
 str(BatDat)
 BatDat2 <- BatDat[,c(1:6, 9, 10)]
 table(BatDat2$SppAccp)
@@ -24,6 +24,20 @@ BatDat2 <- BatDat2%>%mutate("CommonName" = case_when(SppAccp =="Myev" ~ "Long-Ea
 "Laci" ~ "Hoary Bat"
 "Myyu" ~ "Yuma Myotis"
 
+BatDat3 <- BatDat2%>%separate_wider_delim(X.Spp, delim="/", names=c("SppA", "SppB", "SppC", "SppD"), 
+                                          too_few = "align_start")
+BatDat3 <- BatDat3%>%separate_wider_delim(X.Prob, delim="/", names=c("ProbA", "ProbB", "ProbC", "ProbD"),
+                                          too_few= "align_start")
+BatDat3[BatDat3 == "NaN"] <- NA
+BatDat3$Prob[is.na(BatDat3$Prob)] <- 0
+BatDat3$ProbA[is.na(BatDat3$ProbA)] <- 0
+BatDat4 <- BatDat3[BatDat3$ProbA >= 0.8 | BatDat3$Prob >=0.8,]
+table(BatDat4$SppAccp)
+table(BatDat4$SppA)
+BatDat5 <- BatDat4[,c(2,5,6,7,11)]%>%pivot_longer(cols= -Filename, names_to = c("Species", ".value"), 
+                                                  names_sep="_", values_drop_na = TRUE)
+
+
 str(BatDat2)
 BatDat2$SppAccp
 BatDat2$SppAccp[BatDat2$SppAccp == ""] <- NA
@@ -31,3 +45,7 @@ BatCount <- BatDat2%>%
   pivot_wider(names_from = SppAccp,values_from = SppAccp, values_fn = length)
 BatCount[,9:19][is.na(BatCount[,9:19])] <- 0
 BatCount2 <- BatCount %>% summarise(across(c(10:19), sum), .groups = "drop")
+
+
+
+
