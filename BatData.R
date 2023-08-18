@@ -47,5 +47,11 @@ BatCount[,9:19][is.na(BatCount[,9:19])] <- 0
 BatCount2 <- BatCount %>% summarise(across(c(10:19), sum), .groups = "drop")
 
 
-
-
+#Activity levels
+BatAct <- BatDat2%>%separate_wider_delim(Filename,"_", names=c("SerialNo","Date","Time"), too_few="debug")
+BatAct$Time <- gsub(pattern=".wav",replacement="",BatAct$Time)
+BatAct <- BatAct[BatAct$Filename_pieces == 3 & !is.na(BatAct$Filename),]
+BatAct$Date <- as.Date(BatAct$Date, format= "%Y%m%d")
+BatAct$DateTime <- as.POSIXct(paste(BatAct$Date, BatAct$Time), format="%Y-%m-%d %H%M%S")
+BatAct <- BatAct[!is.na(BatAct$SppAccp) | !is.na(BatAct$X.Spp),]
+table(BatAct$Date)

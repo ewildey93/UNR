@@ -473,8 +473,8 @@ write.csv(Ung, "./Ungulates.csv")
 write.csv(Cows, "./Cows.csv")
 DeerTime <- read.csv("./Ungulates.csv")
 DeerTime$DateTime <- as.POSIXct(paste(DeerTime$Date, DeerTime$Time), format="%m/%d/%Y %H:%M:%S")
-DeerTime2 <- DeerTime%>%group_by(Spring)%>%arrange(DateTime, .by_group = TRUE)%>%mutate(returntime = difftime(DateTime, lag(DateTime, default = first(DateTime)), units = "days"))
-
+DeerTime2 <- DeerTime%>%group_by(Spring)%>%arrange(DateTime, .by_group = TRUE)%>%mutate(returntime = difftime(DateTime, lag(DateTime), units = "days"))
+DeerTime2%>%summarise(meanRT=mean(returntime,na.rm=T))
 #############################work in progress below this##################################
 #come up with record table like data(recordTableSample) for input for summaries in CamTrapR  
 #bring in dataframe with datetime metadata pulled from images

@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="ARUSandCams" id="ARUSandCams">
+	<SimpleField name="ID" type="string"></SimpleField>
+	<SimpleField name="Lat" type="float"></SimpleField>
+	<SimpleField name="Lon" type="float"></SimpleField>
+	<SimpleField name="Unit Type" type="string"></SimpleField>
+	<SimpleField name="Spring" type="string"></SimpleField>
+	<SimpleField name="Line" type="string"></SimpleField>
+	<SimpleField name="Waypt Name" type="string"></SimpleField>
+	<SimpleField name="Comments" type="string"></SimpleField>
+	<SimpleField name="Serial No." type="string"></SimpleField>
+	<SimpleField name="field_10" type="string"></SimpleField>
+</Schema>
+<Folder><name>ARUSandCams</name>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">BUSH1</SimpleData>
+		<SimpleData name="Lat">41.32771</SimpleData>
+		<SimpleData name="Lon">-119.872629</SimpleData>
+		<SimpleData name="Unit Type">Camera</SimpleData>
+		<SimpleData name="Spring">DVS</SimpleData>
+		<SimpleData name="Line">Water</SimpleData>
+		<SimpleData name="Waypt Name">Unnamed CAM2</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.872629,41.32771</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">BUSH2</SimpleData>
+		<SimpleData name="Lat">41.327149</SimpleData>
+		<SimpleData name="Lon">-119.872652</SimpleData>
+		<SimpleData name="Unit Type">Camera</SimpleData>
+		<SimpleData name="Spring">DVS</SimpleData>
+		<SimpleData name="Line">Water</SimpleData>
+		<SimpleData name="Waypt Name">Unnamed CAM</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.872652,41.327149</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">BUSH3</SimpleData>
+		<SimpleData name="Lat">41.31853997</SimpleData>
+		<SimpleData name="Lon">-119.88376</SimpleData>
+		<SimpleData name="Unit Type">Camera</SimpleData>
+		<SimpleData name="Spring">BBS</SimpleData>
+		<SimpleData name="Line">Water</SimpleData>
+		<SimpleData name="Waypt Name">BBSCAM1</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.88376,41.31853997</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">CAMPARK1</SimpleData>
+		<SimpleData name="Lat">41.26592</SimpleData>
+		<SimpleData name="Lon">-119.88198</SimpleData>
+		<SimpleData name="Unit Type">Camera</SimpleData>
+		<SimpleData name="Spring">UIS</SimpleData>
+		<SimpleData name="Line">Water</SimpleData>
+		<SimpleData name="Waypt Name">UISCAM8</SimpleData>
+		<SimpleData name="Comments">moved 8/10</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.88198,41.26592</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">BUSH4</SimpleData>
+		<SimpleData name="Lat">41.26777</SimpleData>
+		<SimpleData name="Lon">-119.88452</SimpleData>
+		<SimpleData name="Unit Type">Camera</SimpleData>
+		<SimpleData name="Spring">UIS</SimpleData>
+		<SimpleData name="Line">Upland</SimpleData>
+		<SimpleData name="Comments">moved 8/10</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.88452,41.26777</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">BUSH5</SimpleData>
+		<SimpleData name="Lat">41.26692</SimpleData>
+		<SimpleData name="Lon">-119.88436</SimpleData>
+		<SimpleData name="Unit Type">Camera</SimpleData>
+		<SimpleData name="Spring">UIS</SimpleData>
+		<SimpleData name="Line">Water</SimpleData>
+		<SimpleData name="Comments">moved 8/10</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.88436,41.26692</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">BUSH6</SimpleData>
+		<SimpleData name="Lat">41.32761</SimpleData>
+		<SimpleData name="Lon">-119.872133</SimpleData>
+		<SimpleData name="Unit Type">Camera</SimpleData>
+		<SimpleData name="Spring">DVS</SimpleData>
+		<SimpleData name="Line">UIF</SimpleData>
+		<SimpleData name="Waypt Name">BIRDG23</SimpleData>
+		<SimpleData name="Comments">moved 8/10</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.872133,41.32761</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">BUSH7</SimpleData>
+		<SimpleData name="Lat">41.31839</SimpleData>
+		<SimpleData name="Lon">-119.88404</SimpleData>
+		<SimpleData name="Unit Type">Camera</SimpleData>
+		<SimpleData name="Spring">BBS</SimpleData>
+		<SimpleData name="Line">Water</SimpleData>
+		<SimpleData name="Waypt Name">BBS23BUSH2</SimpleData>
+		<SimpleData name="Comments">Picked up at UIU CAMTRI 41.2698, -119.888</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.88404,41.31839</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">CAMPARK3</SimpleData>
+		<SimpleData name="Lat">41.2663</SimpleData>
+		<SimpleData name="Lon">-119.884</SimpleData>
+		<SimpleData name="Unit Type">Camera</SimpleData>
+		<SimpleData name="Spring">UIS</SimpleData>
+		<SimpleData name="Line">Water</SimpleData>
+		<SimpleData name="Waypt Name">UISCAM14</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.884,41.2663</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">P6</SimpleData>
+		<SimpleData name="Lat">41.2676</SimpleData>
+		<SimpleData name="Lon">-119.88576</SimpleData>
+		<SimpleData name="Unit Type">Camera</SimpleData>
+		<SimpleData name="Spring">UIS</SimpleData>
+		<SimpleData name="Line">Upland</SimpleData>
+		<SimpleData name="field_10">Campark</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.88576,41.2676</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">P12</SimpleData>
+		<SimpleData name="Lat">41.27814</SimpleData>
+		<SimpleData name="Lon">-119.89719</SimpleData>
+		<SimpleData name="Unit Type">Camera</SimpleData>
+		<SimpleData name="Spring">UC</SimpleData>
+		<SimpleData name="Line">Water</SimpleData>
+		<SimpleData name="Waypt Name">UC23CAM1</SimpleData>
+		<SimpleData name="field_10">Campark</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.89719,41.27814</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">P5</SimpleData>
+		<SimpleData name="Lat">41.2779</SimpleData>
+		<SimpleData name="Lon">-119.89778</SimpleData>
+		<SimpleData name="Unit Type">Camera</SimpleData>
+		<SimpleData name="Spring">UC</SimpleData>
+		<SimpleData name="Line">Water</SimpleData>
+		<SimpleData name="Waypt Name">UC23CAM2</SimpleData>
+		<SimpleData name="field_10">Campark</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.89778,41.2779</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">P7</SimpleData>
+		<SimpleData name="Lat">41.277969</SimpleData>
+		<SimpleData name="Lon">-119.899908</SimpleData>
+		<SimpleData name="Unit Type">Camera</SimpleData>
+		<SimpleData name="Spring">UC</SimpleData>
+		<SimpleData name="Waypt Name">UC23CAM3</SimpleData>
+		<SimpleData name="field_10">Campark</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.899908,41.277969</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">UNR3</SimpleData>
+		<SimpleData name="Lat">41.277907</SimpleData>
+		<SimpleData name="Lon">-119.898622</SimpleData>
+		<SimpleData name="Unit Type">Camera</SimpleData>
+		<SimpleData name="Spring">UC</SimpleData>
+		<SimpleData name="Waypt Name">UC23CAM4</SimpleData>
+		<SimpleData name="field_10">Campark</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.898622,41.277907</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="Lat">41.32657</SimpleData>
+		<SimpleData name="Lon">-119.871757</SimpleData>
+		<SimpleData name="Unit Type">Camera</SimpleData>
+		<SimpleData name="Spring">DVS</SimpleData>
+		<SimpleData name="Line">UIF</SimpleData>
+		<SimpleData name="Waypt Name">DVSCAM9</SimpleData>
+		<SimpleData name="field_10">Campark</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.871757,41.32657</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="Lat">41.31808</SimpleData>
+		<SimpleData name="Lon">-119.88528</SimpleData>
+		<SimpleData name="Unit Type">Camera</SimpleData>
+		<SimpleData name="Spring">BBS</SimpleData>
+		<SimpleData name="Line">Upland</SimpleData>
+		<SimpleData name="Waypt Name">BBS23CAM3</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.88528,41.31808</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="Lat">41.31842</SimpleData>
+		<SimpleData name="Lon">-119.8856</SimpleData>
+		<SimpleData name="Unit Type">Camera</SimpleData>
+		<SimpleData name="Spring">BBS</SimpleData>
+		<SimpleData name="Line">Upland</SimpleData>
+		<SimpleData name="Waypt Name">BBS23CAM4</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.8856,41.31842</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">M</SimpleData>
+		<SimpleData name="Lat">41.27831</SimpleData>
+		<SimpleData name="Lon">-119.89697</SimpleData>
+		<SimpleData name="Unit Type">SM4</SimpleData>
+		<SimpleData name="Spring">UC</SimpleData>
+		<SimpleData name="Waypt Name">BIRDM23</SimpleData>
+		<SimpleData name="Serial No.">S4A04293</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.89697,41.27831</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">O</SimpleData>
+		<SimpleData name="Lat">41.31826</SimpleData>
+		<SimpleData name="Lon">-119.88524</SimpleData>
+		<SimpleData name="Unit Type">SM4</SimpleData>
+		<SimpleData name="Spring">BBS</SimpleData>
+		<SimpleData name="Line">Upland</SimpleData>
+		<SimpleData name="Waypt Name">BBS23BIRDU</SimpleData>
+		<SimpleData name="Serial No.">S4A04282</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.88524,41.31826</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">J</SimpleData>
+		<SimpleData name="Lat">41.277529</SimpleData>
+		<SimpleData name="Lon">-199.89961</SimpleData>
+		<SimpleData name="Unit Type">SM4</SimpleData>
+		<SimpleData name="Spring">UC</SimpleData>
+		<SimpleData name="Line">UIF</SimpleData>
+		<SimpleData name="Waypt Name">BIRDJ23</SimpleData>
+		<SimpleData name="Serial No.">S4A04294</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>160.10039,41.277529</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">G</SimpleData>
+		<SimpleData name="Lat">41.32761</SimpleData>
+		<SimpleData name="Lon">-119.872133</SimpleData>
+		<SimpleData name="Unit Type">SM4</SimpleData>
+		<SimpleData name="Spring">DVS</SimpleData>
+		<SimpleData name="Line">UIF</SimpleData>
+		<SimpleData name="Waypt Name">BIRDG23</SimpleData>
+		<SimpleData name="Serial No.">S4A04240</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.872133,41.32761</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">L</SimpleData>
+		<SimpleData name="Lat">41.26692</SimpleData>
+		<SimpleData name="Lon">-119.88436</SimpleData>
+		<SimpleData name="Unit Type">SM4</SimpleData>
+		<SimpleData name="Spring">UIS</SimpleData>
+		<SimpleData name="Line">UOF</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.88436,41.26692</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">N</SimpleData>
+		<SimpleData name="Lat">41.26711</SimpleData>
+		<SimpleData name="Lon">-119.885</SimpleData>
+		<SimpleData name="Unit Type">SM4</SimpleData>
+		<SimpleData name="Spring">UIS</SimpleData>
+		<SimpleData name="Line">UIF</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.885,41.26711</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">Unlabelled- S4U02755</SimpleData>
+		<SimpleData name="Lat">41.2669</SimpleData>
+		<SimpleData name="Lon">-119.88348</SimpleData>
+		<SimpleData name="Unit Type">SM4Bat</SimpleData>
+		<SimpleData name="Spring">UIS</SimpleData>
+		<SimpleData name="Line">lower water</SimpleData>
+		<SimpleData name="Waypt Name">UISCAM1</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.88348,41.2669</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">C - S4U02686</SimpleData>
+		<SimpleData name="Lat">41.26692</SimpleData>
+		<SimpleData name="Lon">-119.88423</SimpleData>
+		<SimpleData name="Unit Type">SM4Bat</SimpleData>
+		<SimpleData name="Spring">UIS</SimpleData>
+		<SimpleData name="Line">upper water</SimpleData>
+		<SimpleData name="Waypt Name">ARU C</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.88423,41.26692</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">D- S4U02768</SimpleData>
+		<SimpleData name="Lat">41.26775</SimpleData>
+		<SimpleData name="Lon">-119.88478</SimpleData>
+		<SimpleData name="Unit Type">SM4Bat</SimpleData>
+		<SimpleData name="Spring">UIS</SimpleData>
+		<SimpleData name="Line">upland</SimpleData>
+		<SimpleData name="Waypt Name">ARU D</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.88478,41.26775</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">P</SimpleData>
+		<SimpleData name="Lat">41.31842</SimpleData>
+		<SimpleData name="Lon">-119.88441</SimpleData>
+		<SimpleData name="Unit Type">SM4Bat</SimpleData>
+		<SimpleData name="Spring">BBS</SimpleData>
+		<SimpleData name="Line">Water</SimpleData>
+		<SimpleData name="Waypt Name">No waypt</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.88441,41.31842</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">K</SimpleData>
+		<SimpleData name="Lat">41.31838</SimpleData>
+		<SimpleData name="Lon">-119.88523</SimpleData>
+		<SimpleData name="Unit Type">SM4Bat</SimpleData>
+		<SimpleData name="Spring">BBS</SimpleData>
+		<SimpleData name="Line">Upland</SimpleData>
+		<SimpleData name="Waypt Name">BBSTRI3</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.88523,41.31838</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">S4U02674</SimpleData>
+		<SimpleData name="Lat">41.326983</SimpleData>
+		<SimpleData name="Lon">-119.872464</SimpleData>
+		<SimpleData name="Unit Type">SM4Bat</SimpleData>
+		<SimpleData name="Spring">DVS</SimpleData>
+		<SimpleData name="Line">Water</SimpleData>
+		<SimpleData name="Waypt Name">No waypt</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.872464,41.326983</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">O</SimpleData>
+		<SimpleData name="Lat">41.328011</SimpleData>
+		<SimpleData name="Lon">-119.871976</SimpleData>
+		<SimpleData name="Unit Type">SM4Bat</SimpleData>
+		<SimpleData name="Spring">DVS</SimpleData>
+		<SimpleData name="Line">UIF</SimpleData>
+		<SimpleData name="Waypt Name">No waypt</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.871976,41.328011</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">F- S4U02686</SimpleData>
+		<SimpleData name="Lat">41.32788</SimpleData>
+		<SimpleData name="Lon">-119.87493</SimpleData>
+		<SimpleData name="Unit Type">SM4Bat</SimpleData>
+		<SimpleData name="Spring">DVS</SimpleData>
+		<SimpleData name="Line">UOF</SimpleData>
+		<SimpleData name="Waypt Name">No waypt</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.87493,41.32788</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">M</SimpleData>
+		<SimpleData name="Lat">41.27764</SimpleData>
+		<SimpleData name="Lon">-119.89805</SimpleData>
+		<SimpleData name="Unit Type">SM4Bat</SimpleData>
+		<SimpleData name="Spring">UC</SimpleData>
+		<SimpleData name="Line">Water</SimpleData>
+		<SimpleData name="Waypt Name">BATM23</SimpleData>
+		<SimpleData name="Serial No.">S4U13333</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.89805,41.27764</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">J</SimpleData>
+		<SimpleData name="Lat">41.27798</SimpleData>
+		<SimpleData name="Lon">-119.89753</SimpleData>
+		<SimpleData name="Unit Type">SM4Bat</SimpleData>
+		<SimpleData name="Spring">UC</SimpleData>
+		<SimpleData name="Line">Water</SimpleData>
+		<SimpleData name="Waypt Name">BatJ23</SimpleData>
+		<SimpleData name="Serial No.">S4U12365</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.89753,41.27798</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">G</SimpleData>
+		<SimpleData name="Lat">41.27764</SimpleData>
+		<SimpleData name="Lon">-119.89721</SimpleData>
+		<SimpleData name="Unit Type">SM4Bat</SimpleData>
+		<SimpleData name="Spring">UC</SimpleData>
+		<SimpleData name="Line">UOF</SimpleData>
+		<SimpleData name="Serial No.">S4U02726</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.89721,41.27764</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">SMU06310</SimpleData>
+		<SimpleData name="Lat">41.31848</SimpleData>
+		<SimpleData name="Lon">-119.8837</SimpleData>
+		<SimpleData name="Unit Type">Song Mini Bat</SimpleData>
+		<SimpleData name="Spring">BBS</SimpleData>
+		<SimpleData name="Line">Water</SimpleData>
+		<SimpleData name="Waypt Name">BBSCAM1</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.8837,41.31848</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">SMA07154</SimpleData>
+		<SimpleData name="Lat">41.26575</SimpleData>
+		<SimpleData name="Lon">-119.88209</SimpleData>
+		<SimpleData name="Unit Type">Song Mini Bird</SimpleData>
+		<SimpleData name="Spring">UIS</SimpleData>
+		<SimpleData name="Line">Water</SimpleData>
+		<SimpleData name="Waypt Name">UISCAM2</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.88209,41.26575</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#ARUSandCams">
+		<SimpleData name="ID">SMA07115</SimpleData>
+		<SimpleData name="Lat">41.327705</SimpleData>
+		<SimpleData name="Lon">-119.872652</SimpleData>
+		<SimpleData name="Unit Type">Song Mini Bird</SimpleData>
+		<SimpleData name="Spring">DVS</SimpleData>
+		<SimpleData name="Line">Water</SimpleData>
+		<SimpleData name="Waypt Name">Unnamed CAM2</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.872652,41.327705</coordinates></Point>
+  </Placemark>
+</Folder>
+</Document></kml>
